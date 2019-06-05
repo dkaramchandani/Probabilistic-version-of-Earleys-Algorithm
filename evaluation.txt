@@ -1,0 +1,34 @@
+Evaluation
+In this section we will evaluate the algorithm as is given to us and answer the questions detailed in the homework.
+
+1.	Evaluate the parser in its current form:
+
+o	What sorts of sentences can it parse?
+
+Ans: Upon inspecting the simple.gr grammar file and trying different sentences for the algorithm to parse, I found that the parser using the current grammar file can parse sentences of certain type.
+From the example given in the sentences.txt file which is ‘I was driving to Chicago’ if we modify the above sentence to use other auxiliaries like do, will, does, is then all the sentences parse, for e.g.,
+•	I did drive to chicago
+•	I will drive to chicago
+•	I do drive to chicago
+Also sentences like ‘He drives’, ‘Aliens steal watermelon’ and so on are also getting parsed by this grammar.
+Based on the findings from above, I can conclude that statements which generally have the above semantic structure will be parsed by the algorithm. Also sentences having the above sematic structure which have varying terminating literals which would invoke the same non-terminating literals would also get parse as they would satisfy the requisites of the algorithm.
+
+o	What types of sentences will it fail to parse?
+
+Ans: Some of the logical and grammatically correct sentences that this algorithm with the ‘simple.gr’  grammar file cannot parse are:
+1.	He steals to give watermelon to John
+2.	In buckaroo john drives
+3.	He was driven to live on alien planet
+4.	Earth is alien planet
+And so on…
+This is due to below reasons: 
+a.	structure of some of the sentences deviates from the general structure mentioned in the first part of this question, 
+b.	Also, as there aren’t any rules in the grammar to handle the deviations of these sentences, this leads to infinite looping often to the recursion
+c.	Also, there are not enough rules to handle sentences which have determinants or articles (fd): a, these, this, the which leads  to sentences not being reduced to match the rules and get us the parse sentence (‘s’ in the grammar).
+
+o	What improvements to the grammar or parser are required to properly parse common failed sentences?
+
+Ans: Some of the improvements that can be done to handle some of the commonly failed sentences are as below.
+•	Adding rules to improve handling of sentences with non-general semantic structure as seen in the 2nd part of this question.
+•	Adding additional rules for terminating literals to as to handle more logically and grammatically correct sentences like addition of auxiliaries like am, be, are or pronouns like myself, herself, etc.
+•	Adding rules to handle punctuation marks in both the parser as well the grammar file would also improve the quality of the parsing

@@ -1,0 +1,85 @@
+Grammar Improvements
+
+In this section we will discuss about the improvements that could be done to the grammar to handle some of the failed sentences.
+
+2.	Look at the grammar. What changes to the grammar alone could improve the parsing (in particular, consider coordinated conjunctions)? Modify the grammar somewhat and evaluate the improvements. What new sentences may be parsed? What invalid sentences are now parsed (if any)?
+
+Ans: In order to find out the changes to be done to the grammar let us first see an instance of failed sentence.
+
+Consider the sentence “earth is a planet”, when we run this in the algorithm we get the below chart details.
+
+Chart:
+0 Inactive: (0, 1, 1, 'fname', ('earth',), ())
+1 Inactive: (0, 1, 1, 'np', ('fname',), (0,))
+2 Active: (0, 1, 1, 'np', ('fname', 'fname'), (0,))
+3 Active: (0, 1, 1, 's', ('np', 'vp'), (1,))
+4 Active: (0, 1, 1, 's', ('np', 'fis', 'np'), (1,))
+5 Inactive: (1, 2, 1, 'fis', ('is',), ())
+6 Inactive: (1, 2, 1, 'faux', ('is',), ())
+7 Active: (1, 2, 1, 's', ('faux', 'np', 'vp'), (6,))
+8 Active: (1, 2, 1, 'vbar', ('faux', 'fv'), (6,))
+9 Active: (0, 2, 2, 's', ('np', 'fis', 'np'), (1, 5))
+10 Inactive: (2, 3, 1, 'fd', ('a',), ())
+11 Active: (2, 3, 1, 'np', ('fd', 'nbar'), (10,))
+12 Inactive: (3, 4, 1, 'fname', ('planet',), ())
+13 Inactive: (3, 4, 1, 'np', ('fname',), (12,))
+
+As seen here, due to insufficient rules for it to reduce to, we don’t have a parse of this sentence.
+If we backtrack, we can see that the rules which were invoked are the below:
+
+fname -> earth
+faux-> is
+fd -> a 
+fname->planet
+fis-> faux
+np -> fname
+
+Since we couldn’t reduce ‘fd fname’ (from ‘a planet’) to some rule, we couldn’t satisfy any of the rules to get S, hence it failed.
+In order to do that, we can add the below rule to handle the above issue.
+
+np -> fd fname
+
+For our file it would translate to :
+0	np	fd	fname
+
+On adding this we now get the sentence parsed successfully with the below parse structure.
+[s [np [fname earth ] ] [fis is ] [np [fd a ] [fname planet ] ] ]
+
+Now using the above, we parse sentences like “buckaroo is a watermelon” (although illogical but grammatically correct”)
+
+Similarly, sentences like “this is chicago”, are also not parsing using the current rules in the simple.gr file. In order to do, we can add below rules to get them parsed.
+np-> fd
+vbar -> faux fname
+
+For our file these would translate to :
+0	np	fd
+0	vbar	faux	fname
+
+Also if we have sentences using coordinated conjunctions like the below, then too the parsing fails. 
+“we steal for watermelons and jetcar”
+
+In order for the grammar to handle sentences with coordinated conjunctions we first need to add the conjunctions as well as rules to help reduce the conjunctions.
+cjun -> for
+cjun -> and
+cjun -> or
+cjun -> but
+cjun -> so
+cjun -> yet
+cjun -> also
+np-> fn cjun
+vbar -> cjun np
+vp -> fv vbar
+Using the above changes, we can now parse sentences using coordinated conjunctions.
+
+For our file these rules would be translated as below :
+0	cjun	for
+0	cjun	and
+0	cjun	or
+0	cjun	but
+0	cjun	so
+0	cjun	yet
+0	cjun	also
+0	np	fn	cjun
+0	vbar	cjun	np
+0	vp	fv	vbar
+Note: Make sure that in the simple.gr that symbols in the rules are seperated by tabs and not spaces

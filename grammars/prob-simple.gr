@@ -1,0 +1,68 @@
+0.5	s	np vp
+0.3	s	faux np vp
+0.2	s	np fis np
+0.1	np	fname
+0.1	np	fname fname
+0.2	np	fpron
+0.3	np	nbar
+0.3	np	fd nbar
+0.4	nbar	fn
+0.6	nbar	fn nbar-mods
+0.8	nbar-mods	pp
+0.2	nbar-mods	pp nbar-mods
+0.7	vp	vbar
+0.3	vp	vbar vbar-mods
+0.15	vbar	fv
+0.18	vbar	faux fv
+0.5	vbar	vbar np
+0.02	vbar	vbar np np
+0.15	vbar	vbar np pp
+0.9	vbar-mods	pp
+0.1	vbar-mods	pp vbar-mods
+1	pp	fp np
+1	fis	is
+0.1	fname	buckaroo
+0.1	fname	banzai
+0.1	fname	john
+0.1	fname	whorfin
+0.1	fname	planet
+0.1	fname	earth
+0.2	fname	chicago
+0.2	fname	ten
+0.2	fn	jetcar
+0.2	fn	alien 
+0.2	fn	aliens
+0.2	fn	watermelon
+0.2	fn	watermelons
+0.1	fpron	i
+0.1	fpron	we
+0.1	fpron	us
+0.1	fpron	you
+0.2	fpron	he
+0.2	fpron	she
+0.1	fpron	it
+0.1	fpron	they
+0.3	fd	a
+0.4	fd	the
+0.15	fd	this
+0.15	fd	these
+0.1	fv	drive 
+0.1	fv	drives
+0.1	fv	driven
+0.1	fv	driving
+0.1	fv	give  
+0.1	fv	gives 
+0.1	fv	live  
+0.1	fv	lives 
+0.1	fv	steal 
+0.1	fv	steals
+0.1	faux	do
+0.1	faux	did
+0.1	faux	does
+0.3	faux	will
+0.2	faux	was
+0.2	faux	is
+0.25	fp	in
+0.25	fp	on
+0.25	fp	to
+0.25	fp	from
