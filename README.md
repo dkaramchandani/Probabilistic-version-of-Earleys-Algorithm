@@ -1,1 +1,1 @@
-# o-Probabilistic-version-of-Earleys-Algorithm
+# Probabilistic-version-of-Earleys-Algorithm
